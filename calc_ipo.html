@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Семейная ипотека Аверс Консалтинг</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+/* Палитра: хвойный зелёный, газоблок, свет в окне */
+:root{
+  --brand:#2B4A3F; --brand-deep:#1F3A30; --on-brand:#F4F2EC; --glow:#E9A23B;
+  --bg:#ECEDE8; --surface:#FAFAF7; --ink:#1E2421; --muted:#56605A; --line:#D3D7CF;
+  --accent:#2B4A3F; --accent-soft:#DCE6DF; --warn:#B0502E; --warn-soft:#F4E1D6;
+  --chip:#E3E6DF; --danger:#B3261E;
+  --sans:"Manrope",Arial,system-ui,sans-serif;
+  --mono:"Manrope",Arial,system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --brand:#2F5245; --brand-deep:#8FC2A9; --on-brand:#F4F2EC; --glow:#F0B252;
+    --bg:#171B19; --surface:#202623; --ink:#EEF0EA; --muted:#A3ADA6; --line:#343C38;
+    --accent:#8FC2A9; --accent-soft:#243A31; --warn:#EE9A74; --warn-soft:#3D2A21;
+    --chip:#2A312D; --danger:#FF8A7F;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --brand:#2F5245; --brand-deep:#8FC2A9; --on-brand:#F4F2EC; --glow:#F0B252;
+  --bg:#171B19; --surface:#202623; --ink:#EEF0EA; --muted:#A3ADA6; --line:#343C38;
+  --accent:#8FC2A9; --accent-soft:#243A31; --warn:#EE9A74; --warn-soft:#3D2A21;
+  --chip:#2A312D; --danger:#FF8A7F;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.45;font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:20px 48px}
+header{display:flex;flex-wrap:wrap;align-items:stretch;gap:16px;margin-bottom:20px}
+.logo{background:var(--brand);border-radius:20px;display:flex;align-items:center;justify-content:center;padding:14px 22px;flex:0 0 auto}
+.logo{gap:14px;color:var(--on-brand)}
+.wm{display:flex;flex-direction:column;line-height:1.05}
+.wm b{font-size:30px;font-weight:800;letter-spacing:-.02em}
+.wm span{font-size:12px;letter-spacing:.12em;text-transform:uppercase;opacity:.8;margin-top:6px;font-weight:600}
+.hero{border-bottom:6px solid var(--glow)}
+.hero{flex:1 1 420px;background:var(--brand);color:var(--on-brand);border-radius:20px;padding:20px 26px;display:flex;flex-direction:column;justify-content:center;gap:6px}
+.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;opacity:.85}
+h1{margin:0;font-size:clamp(24px,3.4vw,34px);font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+.sub{margin:0;max-width:70ch;opacity:.9}
+.grid{display:grid;grid-template-columns:340px 1fr;gap:20px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:18px}
+.field{display:flex;flex-direction:column;gap:8px}
+.label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand-deep);font-weight:700}
+.seg{display:flex;background:var(--chip);border-radius:10px;padding:3px;gap:3px}
+.seg button{flex:1;border:0;background:transparent;color:var(--ink);font:inherit;font-weight:500;padding:9px 6px;border-radius:8px;cursor:pointer;line-height:1.15}
+.seg button small{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:2px}
+.seg button[aria-pressed="true"]{background:var(--brand);color:var(--on-brand);font-weight:700}
+.seg button[aria-pressed="true"] small{color:var(--on-brand);opacity:.85}
+.seg button:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.money{display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:0 12px}
+.money input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:700 20px var(--mono);padding:10px 0;font-variant-numeric:tabular-nums}
+.money input:focus{outline:none}
+.money:focus-within{border-color:var(--accent)}
+.money span{color:var(--muted);font-weight:500}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.small-in{display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:0 10px}
+.small-in input{width:100%;border:0;background:transparent;color:var(--ink);font:700 16px var(--mono);padding:9px 0}
+.small-in input:focus{outline:none}
+.small-in:focus-within{border-color:var(--accent)}
+.small-in span{color:var(--muted)}
+.err{font-size:12.5px;color:var(--danger);min-height:0}
+.derived{font-size:12.5px;color:var(--muted);font-family:var(--mono)}
+.invalid{border-color:var(--danger)!important}
+.seg.mini{padding:2px}
+.seg.mini button{padding:5px 12px;font-size:13px}
+.lblrow{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.termhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.termval{font-weight:800;font-size:18px;color:var(--ink)}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);padding-inline:2px;margin-top:-2px}
+.ticks button{border:0;background:none;color:inherit;font:inherit;cursor:pointer;padding:2px 4px}
+.ticks button[aria-current="true"]{color:var(--brand-deep);font-weight:800}
+.pay .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.pay .v2{font:700 20px var(--mono);font-variant-numeric:tabular-nums}
+.pay .sep{border-top:1px solid rgba(255,255,255,.22);margin:8px 0 6px}
+.check.disabled{opacity:.45;cursor:not-allowed}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;cursor:pointer}
+.check input{width:18px;height:18px;accent-color:var(--accent);margin:1px 0 0}
+.hint{font-size:12.5px;color:var(--muted)}
+.results{display:flex;flex-direction:column;gap:20px;min-width:0}
+.summary{display:flex;flex-wrap:wrap;gap:8px}
+.pill{background:var(--chip);border-radius:999px;padding:5px 12px;font-size:13px}
+.pill b{font-weight:600}
+.pill.warn{background:var(--warn-soft);color:var(--warn)}
+.pill.bad{background:var(--warn-soft);color:var(--danger)}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:640px){.cards{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:16px}
+.card h2{margin:0;font-size:18px;font-weight:700;text-wrap:balance}
+.card .kind{font-size:12px;color:var(--muted);margin-top:3px}
+.rate{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.rate .big{font:700 42px/1 var(--mono);color:var(--accent);letter-spacing:-.02em}
+.rate .note{font-size:13px;color:var(--muted)}
+.pay{background:var(--brand);color:var(--on-brand);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:2px}
+.pay .v{font:700 28px var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.pay .l{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--on-brand);opacity:.85;font-weight:700}
+dl{margin:0;display:grid;grid-template-columns:1fr auto;row-gap:8px;column-gap:12px;font-size:14px}
+dt{color:var(--muted)}
+dd{margin:0;text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:13.5px}
+dt.over,dd.over{color:var(--warn)}
+hr{border:0;border-top:1px solid var(--line);margin:0}
+.bar{height:8px;border-radius:4px;background:var(--chip);overflow:hidden;display:flex}
+.bar i{display:block;height:100%}
+.bar .a{background:var(--accent)}
+.bar .w{background:var(--warn)}
+.diff{font-size:14px;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:14px;padding:14px 18px}
+.diff b{font-family:var(--mono)}
+.tablebox{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;overflow-x:auto}
+.tablebox h3{margin:0 0 10px;font-size:15px;font-weight:700}
+table{border-collapse:collapse;width:100%;min-width:480px;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--brand-deep);font-weight:700}
+td.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+tr.cur td{background:var(--accent-soft);font-weight:600}
+.foot{font-size:12.5px;color:var(--muted);max-width:90ch;display:flex;flex-direction:column;gap:6px}
+.foot p{margin:0}
+@media (prefers-reduced-motion:no-preference){.bar i{transition:width .25s ease}}
+</style>
+
+
+<style>body{margin:0}</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="logo">
+      <svg class="mark" viewBox="0 0 64 64" width="52" height="52" aria-hidden="true">
+        <path d="M8 30 L32 10 L56 30" fill="none" stroke="var(--on-brand)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+        <path d="M15 28 V54 H49 V28" fill="none" stroke="var(--on-brand)" stroke-width="5" stroke-linejoin="round"/>
+        <rect x="26" y="34" width="12" height="12" rx="1.5" fill="var(--glow)"/>
+      </svg>
+      <div class="wm"><b>Аверс</b><span>Консалтинг</span></div>
+    </div>
+    <div class="hero">
+    <div class="eyebrow">Условия с 1 октября 2026</div>
+    <h1>Калькулятор семейной ипотеки</h1>
+    <p class="sub">Введите стоимость объекта и сравните два варианта: квартира в новостройке или дом с землёй — строительство либо покупка готового.</p>
+    </div>
+  </header>
+
+  <div class="grid">
+    <form class="panel" id="form" autocomplete="off">
+      <div class="field">
+        <div class="label">Регион</div>
+        <div class="seg" id="region">
+          <button type="button" data-v="regions" aria-pressed="false">Регионы<small>остальная Россия</small></button>
+          <button type="button" data-v="capitals" aria-pressed="true">Столицы<small>Мск, СПб, МО, ЛО</small></button>
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="label">Количество детей</div>
+        <div class="seg" id="kids">
+          <button type="button" data-v="0" aria-pressed="false">0</button>
+          <button type="button" data-v="1" aria-pressed="true">1</button>
+          <button type="button" data-v="2" aria-pressed="false">2</button>
+          <button type="button" data-v="3" aria-pressed="false">3</button>
+          <button type="button" data-v="4" aria-pressed="false">4</button>
+          <button type="button" data-v="5" aria-pressed="false">5+</button>
+        </div>
+        <label class="check" id="under7Label"><input type="checkbox" id="under7" checked> <span>Хотя бы одному ребёнку менее 7 лет на дату сделки</span></label>
+      </div>
+
+      <div class="field">
+        <div class="termhead"><label class="label" for="termRange">Срок ипотеки</label><span class="termval" id="termVal">15 лет</span></div>
+        <input type="range" id="termRange" min="15" max="30" step="5" value="15" aria-label="Срок ипотеки, лет">
+        <div class="ticks" id="ticks"><button type="button" data-v="15">15</button><button type="button" data-v="20">20</button><button type="button" data-v="25">25</button><button type="button" data-v="30">30</button></div>
+        <div class="hint">Льготная ставка действует первые 15 лет. Дальше остаток льготной части считается по ставке «льготная + 4 п.п.», но не выше ставки коммерческой ипотеки.</div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="amount">Стоимость объекта</label>
+        <div class="money" id="amountBox"><input id="amount" inputmode="numeric" value="12 000 000"><span>₽</span></div>
+        <input type="range" id="amountRange" min="6000000" max="30000000" step="100000" value="12000000" aria-label="Стоимость объекта">
+        <div class="hint">От 6 000 000 до 30 000 000 ₽. Квартира, готовый дом или земля с договором подряда.</div>
+        <div class="err" id="amountErr" hidden></div>
+      </div>
+
+      <div class="field">
+        <div class="lblrow">
+          <label class="label" for="dpVal">Первый взнос</label>
+          <div class="seg mini" id="dpMode">
+            <button type="button" data-v="pct" aria-pressed="true">%</button>
+            <button type="button" data-v="rub" aria-pressed="false">₽</button>
+          </div>
+        </div>
+        <div class="small-in" id="dpBox"><input id="dpVal" inputmode="decimal" value="20,01"><span id="dpUnit">%</span></div>
+        <input type="range" id="dpRange" min="20.01" max="80" step="0.01" value="20.01" aria-label="Первый взнос">
+        <div class="derived" id="dpDerived"></div>
+        <div class="hint">От 20,01% до 80% от стоимости объекта, в процентах или суммой в рублях.</div>
+        <div class="err" id="dpErr" hidden></div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="mk">Материнский капитал</label>
+        <div class="small-in" id="mkBox"><input id="mk" inputmode="numeric" value="0"><span>₽</span></div>
+        <div class="hint">От 0 до 3 000 000 ₽.</div>
+        <div class="err" id="mkErr" hidden></div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="gzhs">Жилищный сертификат (ГЖС)</label>
+        <div class="small-in" id="gzhsBox"><input id="gzhs" inputmode="numeric" value="0"><span>₽</span></div>
+        <div class="hint">От 0 до 10 000 000 ₽. Маткапитал и ГЖС идут в первый взнос, а если их больше взноса, остаток уменьшает сумму кредита.</div>
+        <div class="err" id="gzhsErr" hidden></div>
+      </div>
+
+      <div class="field">
+        <label class="label" for="overRate">Ставка коммерческой ипотеки</label>
+        <div class="small-in" id="overBox"><input id="overRate" inputmode="decimal" value="19,5"><span>%</span></div>
+        <div class="hint">Применяется к сумме сверх лимита и когда льгота недоступна. От 15% до 22%. Для льготной части после 15 лет действует ставка «льготная + 4 п.п.» (не выше этой).</div>
+        <div class="err" id="overErr" hidden></div>
+      </div>
+    </form>
+
+    <section class="results" aria-live="polite">
+      <div class="summary" id="summary"></div>
+      <div class="cards">
+        <article class="card" id="c1"></article>
+        <article class="card" id="c2"></article>
+      </div>
+      <div class="diff" id="diff"></div>
+      <div class="tablebox">
+        <h3 id="tblTitle">Льготные условия</h3>
+        <table>
+          <thead><tr><th>Детей</th><th>Ставка: квартира в новостройке</th><th>Ставка: дом с землёй</th><th>Лимит кредита</th></tr></thead>
+          <tbody id="tbl"></tbody>
+        </table>
+      </div>
+      <div class="foot">
+        <p>Материнский капитал и ГЖС сначала покрывают первый взнос (процент взноса не меняется, уменьшается доля собственных средств), а сумма сверх взноса уменьшает кредит. Платёж аннуитетный, месячная ставка равна годовой, делённой на 12. Если кредит больше льготного лимита, превышение считается как отдельная часть на весь срок по ставке коммерческой ипотеки. Если срок больше 15 лет, льготная часть первые 15 лет гасится по льготной ставке с платежом, рассчитанным на весь срок, а с 16-го года остаток долга пересчитывается на оставшиеся годы по ставке «льготная + 4 п.п.» (не выше ставки коммерческой ипотеки). Средневзвешенная ставка взвешена по суммам частей и показывается при сроке 15 лет.</p>
+        <p>Для варианта «дом с землёй» лимит кредита принят таким же, как для покупки жилья с тем же числом детей и регионом; ставка 6% независимо от числа детей и региона. Расчёт ориентировочный: банк может учитывать страхование, комиссии и собственные требования к взносу.</p>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+(function(){
+  var RULES = {
+    regions:  {1:[10,6e6], 2:[8,8e6],  3:[6,10e6], 4:[4,10e6], 5:[2,10e6]},
+    capitals: {1:[12,12e6],2:[10,15e6],3:[8,18e6], 4:[6,18e6], 5:[4,18e6]}
+  };
+  var BUILD_RATE = 6;
+  var state = {region:'capitals', kids:1, term:15, amount:12e6, dpMode:'pct'};
+  var PRICE_MIN=6e6, PRICE_MAX=3e7, DP_MIN=20.01, DP_MAX=80, MK_MAX=3e6, GZHS_MAX=1e7, OVER_MIN=15, OVER_MAX=22;
+
+  var $ = function(id){return document.getElementById(id)};
+  var rub = function(v){return Math.round(v).toLocaleString('ru-RU') + ' ₽'};
+  var pct = function(v){return (Math.round(v*100)/100).toLocaleString('ru-RU') + '%'};
+  var mln = function(v){return (v/1e6).toLocaleString('ru-RU',{maximumFractionDigits:1}) + ' млн ₽'};
+  var num = function(s){var n = parseFloat(String(s).replace(/\s/g,'').replace(',','.')); return isFinite(n)?n:0};
+  function ann(P, ratePct, months){
+    if(P<=0) return 0;
+    var r = ratePct/100/12;
+    if(r===0) return P/months;
+    return P * r / (1 - Math.pow(1+r, -months));
+  }
+  function kidsLabel(k){return k>=5?'5 и более':String(k)}
+
+  function segInit(id,key,cast){
+    var el=$(id);
+    el.addEventListener('click',function(e){
+      var b=e.target.closest('button'); if(!b) return;
+      state[key]=cast(b.dataset.v);
+      el.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed', x===b?'true':'false')});
+      render();
+    });
+  }
+  segInit('region','region',String);
+  segInit('kids','kids',Number);
+  // 0 детей: семейная ипотека недоступна, галочка блокируется, срок по умолчанию 30 лет
+  var prevKids=state.kids;
+  $('kids').addEventListener('click',function(e){
+    if(!e.target.closest('button')) return;
+    var u=$('under7'), none=state.kids===0;
+    u.disabled=none; $('under7Label').classList.toggle('disabled',none);
+    if(none && prevKids!==0){u.checked=false; setTerm(30);}
+    else if(!none && prevKids===0){u.checked=true; setTerm(15);}
+    prevKids=state.kids; render();
+  });
+  var termRange=$('termRange');
+  function setTerm(t){
+    state.term=t; termRange.value=t;
+    $('termVal').textContent=t+' лет';
+    $('ticks').querySelectorAll('button').forEach(function(b){b.setAttribute('aria-current', Number(b.dataset.v)===t?'true':'false')});
+  }
+  termRange.addEventListener('input',function(){setTerm(Number(termRange.value)); render();});
+  $('ticks').addEventListener('click',function(e){var b=e.target.closest('button'); if(!b) return; setTerm(Number(b.dataset.v)); render();});
+  setTerm(state.term);
+
+  var amountIn=$('amount'), range=$('amountRange'), dpIn=$('dpVal'), overIn=$('overRate');
+  var clamp=function(v,a,b){return Math.min(Math.max(v,a),b)};
+  var fmtNum=function(v,d){return v.toLocaleString('ru-RU',{maximumFractionDigits:d})};
+
+  // Эффективные (с учётом ограничений) значения и сообщения об ошибках
+  function getInputs(){
+    var raw=state.amount, price=clamp(raw,PRICE_MIN,PRICE_MAX);
+    var priceErr = raw<PRICE_MIN ? 'Минимальная стоимость 6 000 000 ₽. В расчёте используется минимум.'
+                 : raw>PRICE_MAX ? 'Максимальная стоимость 30 000 000 ₽. В расчёте используется максимум.' : '';
+    var minDown=Math.ceil(price*DP_MIN/100), maxDown=Math.floor(price*DP_MAX/100), down, dp, dpErr='';
+    if(state.dpMode==='pct'){
+      var p=num(dpIn.value);
+      if(p<DP_MIN){dpErr='Взнос не может быть меньше 20,01%. В расчёте используется 20,01%.'; p=DP_MIN;}
+      else if(p>DP_MAX){dpErr='Взнос не может быть больше 80%. В расчёте используется 80%.'; p=DP_MAX;}
+      dp=p; down=price*p/100;
+    } else {
+      var d=num(dpIn.value);
+      if(d<minDown){dpErr='Взнос не может быть меньше 20,01% от стоимости ('+rub(minDown)+'). В расчёте используется минимум.'; d=minDown;}
+      else if(d>maxDown){dpErr='Взнос не может быть больше 80% от стоимости ('+rub(maxDown)+'). В расчёте используется максимум.'; d=maxDown;}
+      down=d; dp=price>0?d/price*100:0;
+    }
+    var o=num(overIn.value), overErr='';
+    if(o<OVER_MIN){overErr='Ставка не может быть ниже 15%. В расчёте используется 15%.'; o=OVER_MIN;}
+    else if(o>OVER_MAX){overErr='Ставка не может быть выше 22%. В расчёте используется 22%.'; o=OVER_MAX;}
+    var mk=num($('mk').value), gz=num($('gzhs').value), mkErr='', gzErr='';
+    if(mk>MK_MAX){mkErr='Не больше 3 000 000 ₽. В расчёте используется 3 000 000 ₽.'; mk=MK_MAX;}
+    if(gz>GZHS_MAX){gzErr='Не больше 10 000 000 ₽. В расчёте используется 10 000 000 ₽.'; gz=GZHS_MAX;}
+    return {mk:mk, gz:gz, mkErr:mkErr, gzErr:gzErr, maxDown:maxDown,
+      price:price, down:down, dp:dp, minDown:minDown, overRate:o, priceErr:priceErr, dpErr:dpErr, overErr:overErr};
+  }
+  function showErr(boxId,errId,msg){
+    $(boxId).classList.toggle('invalid',!!msg);
+    var e=$(errId); e.textContent=msg; e.hidden=!msg;
+  }
+
+  amountIn.addEventListener('input',function(){
+    var digits=amountIn.value.replace(/\D/g,'').slice(0,10);
+    state.amount=Number(digits)||0;
+    amountIn.value=state.amount?state.amount.toLocaleString('ru-RU'):'';
+    range.value=clamp(state.amount,PRICE_MIN,PRICE_MAX);
+    render();
+  });
+  range.addEventListener('input',function(){
+    state.amount=Number(range.value);
+    amountIn.value=state.amount.toLocaleString('ru-RU');
+    render();
+  });
+  dpIn.addEventListener('input',function(){
+    if(state.dpMode==='rub'){
+      var digits=dpIn.value.replace(/\D/g,'').slice(0,10);
+      dpIn.value=digits?Number(digits).toLocaleString('ru-RU'):'';
+    }
+    render();
+  });
+  // При выходе из поля подставляем допустимое значение
+  amountIn.addEventListener('change',function(){
+    state.amount=clamp(state.amount,PRICE_MIN,PRICE_MAX);
+    amountIn.value=state.amount.toLocaleString('ru-RU'); range.value=state.amount; render();
+  });
+  dpIn.addEventListener('change',function(){
+    var v=getInputs();
+    dpIn.value = state.dpMode==='pct' ? fmtNum(v.dp,2) : Math.round(v.down).toLocaleString('ru-RU');
+    render();
+  });
+  overIn.addEventListener('input',render);
+  ['mk','gzhs'].forEach(function(id){
+    var el=$(id);
+    el.addEventListener('input',function(){var d=el.value.replace(/\D/g,'').slice(0,9); el.value=d?Number(d).toLocaleString('ru-RU'):''; render();});
+    el.addEventListener('change',function(){var v=getInputs(); el.value=Math.round(id==='mk'?v.mk:v.gz).toLocaleString('ru-RU'); render();});
+  });
+  var dpRange=$('dpRange');
+  function syncDpRange(v){
+    if(state.dpMode==='pct'){dpRange.min=DP_MIN; dpRange.max=DP_MAX; dpRange.step=0.01; dpRange.value=v.dp;}
+    else {dpRange.min=v.minDown; dpRange.max=v.maxDown; dpRange.step=1; dpRange.value=v.down;}
+  }
+  dpRange.addEventListener('input',function(){
+    var x=Number(dpRange.value);
+    if(state.dpMode==='pct') dpIn.value=fmtNum(x,2);
+    else {var v=getInputs(); x=Math.min(Math.max(Math.round(x/10000)*10000,v.minDown),v.maxDown); dpIn.value=Math.round(x).toLocaleString('ru-RU');}
+    render();
+  });
+  overIn.addEventListener('change',function(){overIn.value=fmtNum(getInputs().overRate,2); render();});
+  $('dpMode').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b||b.dataset.v===state.dpMode) return;
+    var v=getInputs();
+    state.dpMode=b.dataset.v;
+    $('dpMode').querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed', x===b?'true':'false')});
+    $('dpUnit').textContent = state.dpMode==='pct'?'%':'₽';
+    dpIn.inputMode = state.dpMode==='pct'?'decimal':'numeric';
+    dpIn.value = state.dpMode==='pct' ? fmtNum(v.dp,2) : Math.round(v.down).toLocaleString('ru-RU');
+    render();
+  });
+  // Без ребёнка до 7 лет льготы нет: срок по умолчанию 30 лет; с ребёнком — 15 лет
+  $('under7').addEventListener('input',function(){setTerm($('under7').checked?15:30); render();});
+  $('form').addEventListener('submit',function(e){e.preventDefault()});
+
+  var SUBSIDY_YEARS=15, AFTER_STEP=4; // после 15 лет: льготная ставка + 4 п.п., но не выше коммерческой
+  function calc(prefRate, limit, eligible){
+    var v=getInputs(), months=state.term*12, overRate=v.overRate, dp=v.dp;
+    var price=v.price, down=v.down, subs=v.mk+v.gz;
+    var fromSubs=Math.min(subs,down), own=Math.max(down-subs,0), extra=Math.max(subs-down,0);
+    var A=Math.max(price-down-extra,0);
+    var pref = eligible ? Math.min(A,limit) : 0;
+    var over = A - pref;
+    var m2=ann(over,overRate,months);
+    // Льготная часть: первые 15 лет по льготной ставке (платёж на весь срок), затем остаток по ставке «льготная + 4 п.п.»
+    var subM=Math.min(months,SUBSIDY_YEARS*12), restM=months-subM;
+    var afterRate=Math.min(prefRate+AFTER_STEP,overRate);
+    var m1=ann(pref,prefRate,months), m1b=0, bal=0;
+    if(restM>0 && pref>0){
+      var r=prefRate/100/12, g=Math.pow(1+r,subM);
+      bal = r===0 ? pref-m1*subM : pref*g - m1*(g-1)/r;
+      m1b=ann(bal,afterRate,restM);
+    }
+    var monthly=m1+m2, monthly2=restM>0?m1b+m2:0;
+    var total=monthly*subM + monthly2*restM;
+    return {loan:A, pref:pref, over:over, prefRate:prefRate, overRate:overRate, afterRate:afterRate, m1:m1, m1b:m1b, bal:bal, m2:m2,
+      monthly:monthly, monthly2:monthly2, split:restM>0 && pref>0, restYears:restM/12,
+      total:total, overpay:total-A, down:down, price:price, dp:dp, subs:subs, fromSubs:fromSubs, own:own, extra:extra, mk:v.mk, gz:v.gz,
+      wavg: A>0 ? (pref*prefRate+over*overRate)/A : 0, limit:limit, eligible:eligible};
+  }
+
+  function cardHTML(title, kind, c, rateNote){
+    var A=c.loan, prefW=A?c.pref/A*100:0;
+    var h='<div><h2>'+title+'</h2><div class="kind">'+kind+'</div></div>';
+    h+='<div class="rate"><span class="big"'+(c.eligible?'':' style="color:var(--warn)"')+'>'+pct(c.eligible?c.prefRate:c.overRate)+'</span><span class="note">'+rateNote+'</span></div>';
+    if(c.split){
+      h+='<div class="pay"><span class="l">Ежемесячный платёж, первые 15 лет</span><span class="v">'+rub(c.monthly)+'</span>'
+       +'<div class="sep"></div><div class="row"><span class="l">с 16-го года, '+c.restYears+' лет</span><span class="v2">'+rub(c.monthly2)+'</span></div></div>';
+    } else {
+      h+='<div class="pay"><span class="l">Ежемесячный платёж</span><span class="v">'+rub(c.monthly)+'</span></div>';
+    }
+    if(A>0 && c.eligible){h+='<div class="bar" title="Льготная часть / сверх лимита"><i class="a" style="width:'+prefW+'%"></i><i class="w" style="width:'+(100-prefW)+'%"></i></div>';}
+    h+='<dl>';
+    h+='<dt>Стоимость объекта</dt><dd>'+rub(c.price)+'</dd>';
+    h+='<dt>Первый взнос ('+pct(c.dp)+')</dt><dd>'+rub(c.down)+'</dd>';
+    if(c.subs>0){
+      h+='<dt>  из них маткапитал и ГЖС</dt><dd>'+rub(c.fromSubs)+'</dd>';
+      h+='<dt>  из собственных средств</dt><dd>'+rub(c.own)+'</dd>';
+      if(c.extra>0) h+='<dt>Маткапитал и ГЖС сверх взноса (уменьшают кредит)</dt><dd>'+rub(c.extra)+'</dd>';
+    }
+    h+='<dt><b>Сумма кредита</b></dt><dd><b>'+rub(c.loan)+'</b></dd>';
+    if(!c.eligible){
+      h+='<dt class="over">Коммерческая ипотека под '+pct(c.overRate)+'</dt><dd class="over">'+rub(c.over)+'</dd>';
+    } else {
+    h+='<dt>Льготный лимит</dt><dd>'+rub(c.limit)+'</dd>';
+    h+='<dt>Льготная часть кредита</dt><dd>'+rub(c.pref)+'</dd>';
+    if(c.split){
+      h+='<dt>  платёж по ней, первые 15 лет</dt><dd>'+rub(c.m1)+'</dd>';
+      h+='<dt class="over">  остаток долга через 15 лет</dt><dd class="over">'+rub(c.bal)+'</dd>';
+      h+='<dt class="over">  платёж с 16-го года под '+pct(c.afterRate)+'</dt><dd class="over">'+rub(c.m1b)+'</dd>';
+    } else {
+      h+='<dt>  платёж по ней</dt><dd>'+rub(c.m1)+'</dd>';
+    }
+    }
+    if(c.over>0 && c.eligible){
+      h+='<dt class="over">Сверх лимита под '+pct(c.overRate)+'</dt><dd class="over">'+rub(c.over)+'</dd>';
+      h+='<dt class="over">  платёж по ней (весь срок)</dt><dd class="over">'+rub(c.m2)+'</dd>';
+      if(!c.split) h+='<dt>Средневзвешенная ставка</dt><dd>'+pct(c.wavg)+'</dd>';
+    }
+    h+='</dl><hr><dl>';
+    h+='<dt>Всего выплат за '+state.term+' лет</dt><dd>'+rub(c.total)+'</dd>';
+    h+='<dt>Переплата по процентам</dt><dd>'+rub(c.overpay)+'</dd>';
+    h+='</dl>';
+    return h;
+  }
+
+  function render(){
+    var iv=getInputs();
+    showErr('amountBox','amountErr',iv.priceErr);
+    showErr('dpBox','dpErr',iv.dpErr);
+    showErr('overBox','overErr',iv.overErr);
+    showErr('mkBox','mkErr',iv.mkErr);
+    showErr('gzhsBox','gzhsErr',iv.gzErr);
+    syncDpRange(iv);
+    var subsAll=iv.mk+iv.gz;
+    $('dpDerived').textContent = (state.dpMode==='pct' ? '= '+rub(iv.down) : '= '+pct(iv.dp)+' от стоимости')
+      + (subsAll>0 ? ' · из собственных средств '+rub(Math.max(iv.down-subsAll,0)) : '');
+    var eligible=state.kids>0 && $('under7').checked;
+    var rule=state.kids>0 ? RULES[state.region][Math.min(state.kids,5)] : [0,0];
+    var c1=calc(rule[0],rule[1],eligible), c2=calc(BUILD_RATE,rule[1],eligible);
+
+    var s='<span class="pill">'+(state.region==='capitals'?'Столичные регионы':'Регионы России')+'</span>';
+    s+='<span class="pill">Детей: <b>'+kidsLabel(state.kids)+'</b></span>';
+    s+='<span class="pill">Срок: <b>'+state.term+' лет</b></span>';
+    if(eligible) s+='<span class="pill">Лимит: <b>'+rub(rule[1])+'</b></span>';
+    if(!eligible) s+='<span class="pill bad">'+(state.kids===0?'Нет детей: семейная ипотека недоступна':'Нет ребёнка младше 7 лет: льготная ставка не применяется')+', вся сумма по '+pct(iv.overRate)+'</span>';
+    if(subsAll>0) s+='<span class="pill">Маткапитал + ГЖС: <b>'+rub(subsAll)+'</b></span>';
+    s+='<span class="pill">Кредит: <b>'+rub(c1.loan)+'</b></span>';
+    if(eligible && c1.loan>rule[1]) s+='<span class="pill warn">Превышение лимита: '+rub(c1.loan-rule[1])+'</span>';
+    if(eligible && state.term>SUBSIDY_YEARS) s+='<span class="pill warn">Льготная ставка 15 лет, затем '+(state.term-SUBSIDY_YEARS)+' лет по льготной ставке + 4 п.п.: '+pct(c1.afterRate)+' / '+pct(c2.afterRate)+'</span>';
+    $('summary').innerHTML=s;
+
+    var note1 = eligible ? 'льготная ставка для '+kidsLabel(state.kids)+' '+(state.kids===1?'ребёнка':'детей') : 'коммерческая ипотека, льгота недоступна';
+    var note2 = eligible ? 'единая ставка на ИЖС' : 'коммерческая ипотека, льгота недоступна';
+    $('c1').innerHTML=cardHTML('Вариант 1','Квартира в новостройке',c1,note1);
+    $('c2').innerHTML=cardHTML('Вариант 2','Покупка земли и строительство дома или приобретение готового дома с землёй',c2,note2);
+
+    var d=c1.monthly-c2.monthly, dt=c1.total-c2.total;
+    if(!eligible || Math.abs(d)<1){
+      $('diff').innerHTML='При этих параметрах платежи по обоим вариантам совпадают.';
+    } else {
+      var cheaper = d>0 ? 'Вариант 2 (дом с землёй)' : 'Вариант 1 (квартира в новостройке)';
+      $('diff').innerHTML=cheaper+' дешевле на <b>'+rub(Math.abs(d))+'</b> в месяц'+(state.term>SUBSIDY_YEARS?' в первые 15 лет':'')+' и на <b>'+rub(Math.abs(dt))+'</b> за весь срок.';
+    }
+
+    $('tblTitle').textContent='Льготные условия: '+(state.region==='capitals'?'Москва, Санкт-Петербург, Московская и Ленинградская области':'регионы России');
+    var rows='';
+    [1,2,3,4,5].forEach(function(k){
+      var r=RULES[state.region][k];
+      rows+='<tr'+(k===Math.min(state.kids,5)?' class="cur"':'')+'><td>'+kidsLabel(k)+'</td><td class="n">'+pct(r[0])+'</td><td class="n">'+pct(BUILD_RATE)+'</td><td class="n">'+rub(r[1])+'</td></tr>';
+    });
+    $('tbl').innerHTML=rows;
+  }
+  render();
+})();
+</script>
+
+</body>
+</html>
